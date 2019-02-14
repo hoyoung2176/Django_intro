@@ -1,0 +1,15 @@
+<!--extends는 가장 위에잇어야한다.-->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}STATIC{% endblock %}
+
+{% block css%}
+    <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css"/>
+
+{% endblock%}
+
+{% block body %}
+    <img src="{% static 'img01.jpg' %}" alt="image"></img>
+{% endblock %}

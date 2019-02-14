@@ -1,0 +1,90 @@
+<body style="height: 10000px;">
+    <h3>1. 반복문</h3>
+    {% for menu in my_list %}
+        <p>{{ menu }}</p>
+    {% endfor %}
+    <hr>
+    {% for menu in my_list %}
+        {{ forloop.counter }}
+        {% if forloop.first %}
+            <p> 짜장면+고추가루 </p>
+        {% else %}
+            <p>{{ menu }}</p>
+        {% endif %}
+    {% endfor %}
+    <hr>
+    {% for user in empty_list %}
+        <p>{{ user }}</p>
+    {% empty %}
+        <p>지금 가입한 회원이 없습니다.</p>
+    {% endfor %}
+    <hr>
+    
+    <h3>2. 조건문 </h3>
+    {% if '짜장면' in my_list %}
+        <p>짜장면엔 고추가루지</p>
+    {% endif %}
+    <hr>
+    
+    <h3>3. length filter 활용</h3>
+    {% for message in messages %}
+        {% if message|length > 5 %}
+            <p>글씨가 너무 길어요.</p>
+        {% else %}
+            <p>{{ message }}, {{ message|length }}</p>
+        {% endif %}
+    {% endfor %}
+    <hr>
+    
+    <h3>4. lorem ipsum</h3>
+    {% lorem %}
+    <hr>
+    <!--3단어만 나오게 하기-->
+    {% lorem 3 w %}
+    <hr>
+    {% lorem 4 w random %}
+    <hr>
+    <!--문단 두개 나오게 하기-->
+    {% lorem 2 p %}
+    <hr>
+    
+    <h3>5. 글자수 제한</h3>
+    <p>{{ my_sentence|truncatewords:3 }}</p>
+    <!--기본값으로 {공백 + ... } 총 4개글자를 차지하기 때문에 truncatechars:3하면 ...나옴-->
+    <p>{{ my_sentence|truncatechars:6 }}</p>    
+    <p>{{ my_sentence|truncatechars:10 }}</p> 
+    
+    <h3>6. 글자 관련 filter</h3>
+    <p>{{ 'abc'|length }}</p>
+    <p>{{ 'ABC'|lower }}</p>
+    <p>{{ my_sentence|title }}</p>
+    <p>{{ 'abc def'|capfirst }}</p>
+    <p>{{ my_list|random }}</p>
+    <hr>
+    
+    <h3>7. 연산</h3>
+    <p>{{ 4|add:6 }}</p>
+    <!--기본적으로는 add만 지원하고 그외에는 django-mathfilter 모듈을 이용해야한다.-->
+    <hr>
+    
+    <h3>8. 날짜 표현</h3>
+    {% now "DATETIME_FORMAT" %}<br>
+    {% now "SHORT_DATETIME_FORMAT" %}<br>
+    {% now "DATE_FORMAT" %}<br>
+    {% now "SHORT_DATE_FORMAT" %}<br>
+    
+    <hr>
+    {% now "Y년 m월 d일 (D) h:i" %}
+    <hr>
+    
+    <!--변수화하는 방법-->
+    {% now "Y" as current_year %}
+    Copyright {{ current_year }}
+    <hr>
+    {{ datetimenow }}<br>
+    {{ datatimenow|date:"SHORT_DATETIME_FORMAT" }}
+    <hr>
+    
+    <h3>9.기타</h3>
+    {{ 'google.com'|urlize }}
+</body>
